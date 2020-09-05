@@ -40,11 +40,30 @@ export default {
         {
             title: 'Category',
             dataIndex: 'category',
+            
         },
 
           {
             title: 'Project',
             dataIndex: 'project',
+            key: 'project',
+            scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            
+          },
+          onFilter: (value, record) =>
+            record.project
+              .toString()
+              .toLowerCase()
+              .includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
           },
           {
             title: 'Users',
@@ -76,12 +95,22 @@ export default {
         const newData = {
           key: count,
           category: `A`,
-          project: `Project X${count}`,
+          project: `Project X${count}`, 
           users: `1 user`,
           dashboards: `${count} dashboards`,
         };
         this.dataSource = [...dataSource, newData];
         this.count = count + 1;
+      },
+      handleSearch(selectedKeys, confirm, dataIndex) {
+        confirm();
+        this.searchText = selectedKeys[0];
+        this.searchedColumn = dataIndex;
+      },
+  
+      handleReset(clearFilters) {
+        clearFilters();
+        this.searchText = '';
       },
     },
   };
