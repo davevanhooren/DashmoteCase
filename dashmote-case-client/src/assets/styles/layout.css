@@ -13,11 +13,23 @@
     float: left;
   }
   
-  #dashmote-case-layout .ant-layout-header .profile {
-    width: 180px;
+  #dashmote-case-layout .ant-layout-header .profile-photo {
+    width: 50px;
     height: 31px;
-    margin: 0px 24px 16px 0;
+    margin: 0px 0px 16px 0;
     float: right;
+  }
+
+  #dashmote-case-layout .ant-layout-header .profile-name {
+    width: 150px;
+    height: 31px;
+    float: right;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #dashmote-case-layout .ant-layout-header .profile-name {
+        display: none;
+    }
   }
   
   #dashmote-case-layout .ant-layout-footer {
@@ -33,7 +45,7 @@
     line-height: 120px;
   }
   #dashmote-case-layout .ant-layout-content {
-    background: rgba(16, 142, 233, 1);
+    background: #F2F6FC;
     color: #fff;
     min-height: 120px;
     line-height: 120px;
