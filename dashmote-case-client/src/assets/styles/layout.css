@@ -1,0 +1,46 @@
+#dashmote-case-layout {
+    text-align: center;
+  }
+  #dashmote-case-layout .ant-layout-header {
+    background: #7dbcea;
+    color: #000;
+  }
+  
+  #dashmote-case-layout .ant-layout-header .logo {
+    width: 120px;
+    height: 31px;
+    margin: 0px 24px 16px 0;
+    float: left;
+  }
+  
+  #dashmote-case-layout .ant-layout-header .profile {
+    width: 180px;
+    height: 31px;
+    margin: 0px 24px 16px 0;
+    float: right;
+  }
+  
+  #dashmote-case-layout .ant-layout-footer {
+    background: #7dbcea;
+    color: #fff;
+  }
+  #dashmote-case-layout .ant-layout-footer {
+    line-height: 1.5;
+  }
+  #dashmote-case-layout .ant-layout-sider {
+    background: #3ba0e9;
+    color: #fff;
+    line-height: 120px;
+  }
+  #dashmote-case-layout .ant-layout-content {
+    background: rgba(16, 142, 233, 1);
+    color: #fff;
+    min-height: 120px;
+    line-height: 120px;
+  }
+  #dashmote-case-layout > .ant-layout {
+    margin-bottom: 48px;
+  }
+  #dashmote-case-layout > .ant-layout:last-child {
+    margin: 0;
+  }
