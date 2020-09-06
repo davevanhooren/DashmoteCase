@@ -38,13 +38,11 @@ export default {
             category: 'D',
           },
         ],
-        count: 4,
         columns: [
         {
             title: 'Category',
             dataIndex: 'category',
             scopedSlots: { customRender: 'categoryoperation' },
-            
         },
 
           {

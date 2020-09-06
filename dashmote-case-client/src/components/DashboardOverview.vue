@@ -1,13 +1,9 @@
 <template>
   <div class="overview">
     <div>
-    <!-- Add button -->  <!--
-    <a-button class="add-button" @click="handleAdd">
-      Add
-    </a-button>  -->
     
     <a-button class="add-button" type="primary" icon="plus-circle" @click="showDrawer">Add new Project</a-button>
-    
+    <a-input-search class="search-input" placeholder="input search text" enter-button @search="onSearch" />
 
     <!-- Add new project part -->
     <a-drawer class="addProjectDrawer"
@@ -74,7 +70,7 @@
   </a-form>
     </a-drawer>
 
-    <a-table bordered :data-source="dataSource" :columns="columns">
+    <a-table class="dashboardstable"  :data-source="dataSource" :columns="columns" >
       
       <!-- Dropdown filter part -->
       <div
@@ -122,16 +118,16 @@
       </template>
 
       <template slot="categoryoperation" slot-scope="text, record">
-        <img v-if="record.category=='A'" alt="A" src="../assets/images/categoryicon/A.svg" height=40px>
-        <img v-else-if="record.category=='B'" alt="B" src="../assets/images/categoryicon/B.svg" height=40px>
-        <img v-else-if="record.category=='C'" alt="C" src="../assets/images/categoryicon/C.svg" height=40px>
-        <img v-else-if="record.category=='D'" alt="D" src="../assets/images/categoryicon/D.svg" height=40px>
-        <img v-else-if="record.category=='E'" alt="E" src="../assets/images/categoryicon/E.svg" height=40px>
-        <img v-else-if="record.category=='F'" alt="F" src="../assets/images/categoryicon/F.svg" height=40px>
+        <img v-if="record.category=='A'" alt="A" src="../assets/images/categoryicon/A.svg" height=60px>
+        <img v-else-if="record.category=='B'" alt="B" src="../assets/images/categoryicon/B.svg" height=60px>
+        <img v-else-if="record.category=='C'" alt="C" src="../assets/images/categoryicon/C.svg" height=60px>
+        <img v-else-if="record.category=='D'" alt="D" src="../assets/images/categoryicon/D.svg" height=60px>
+        <img v-else-if="record.category=='E'" alt="E" src="../assets/images/categoryicon/E.svg" height=60px>
+        <img v-else-if="record.category=='F'" alt="F" src="../assets/images/categoryicon/F.svg" height=60px>
       </template>
 
       <template slot="dashboardoperation" slot-scope="text, record">
-        <a-button type="primary" v-text="record.dashboards" disabled="true" style="color:green"></a-button>
+        <a-button disabled type="primary" v-text="record.dashboards" style="color:green"></a-button>
       </template>
 
     </a-table>
