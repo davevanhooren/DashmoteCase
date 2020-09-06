@@ -5,6 +5,9 @@ export default {
     },
     data() {
       return {
+        formLayout: 'vertical',
+        form: this.$form.createForm(this, { name: 'coordinated' }),
+        visible: false,
         dataSource: [
           {
             key: '0',
@@ -50,7 +53,6 @@ export default {
             scopedSlots: {
             filterDropdown: 'filterDropdown',
             filterIcon: 'filterIcon',
-            
           },
           onFilter: (value, record) =>
             record.project
@@ -86,6 +88,7 @@ export default {
     },
     
     methods: {
+    // Item delete method
       onDelete(key) {
         const dataSource = [...this.dataSource];
         this.dataSource = dataSource.filter(item => item.key !== key);
@@ -95,13 +98,15 @@ export default {
         const newData = {
           key: count,
           category: `A`,
-          project: `Project X${count}`, 
+          project: `Project X${count}`,
           users: `1 user`,
           dashboards: `${count} dashboards`,
         };
         this.dataSource = [...dataSource, newData];
         this.count = count + 1;
       },
+
+      // Table search methods
       handleSearch(selectedKeys, confirm, dataIndex) {
         confirm();
         this.searchText = selectedKeys[0];
@@ -111,6 +116,38 @@ export default {
       handleReset(clearFilters) {
         clearFilters();
         this.searchText = '';
+      },
+
+      // Drawer show methods
+      afterVisibleChange(val) {
+        console.log('visible', val);
+      },
+      showDrawer() {
+        this.visible = true;
+        
+      },
+      onClose() {
+        this.visible = false;
+      },
+
+      // Drawer form methods
+      handleSubmit(e) {
+        e.preventDefault();
+        this.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+            const { count, dataSource } = this;
+            const newData = {
+                key: count,
+                category: values["category"],
+                project: values["project"],
+                users: values["users"],
+                dashboards: values["dashboards"],
+        };
+        this.dataSource = [...dataSource, newData];
+        this.count = count + 1;
+          }
+        });
       },
     },
   };

@@ -1,11 +1,79 @@
 <template>
   <div class="overview">
     <div>
-      
+    <!-- Add button -->  <!--
     <a-button class="add-button" @click="handleAdd">
       Add
-    </a-button>
+    </a-button>  -->
     
+    <a-button class="add-button" type="primary" icon="plus-circle" @click="showDrawer">Add new Project</a-button>
+    
+
+    <!-- Add new project part -->
+    <a-drawer class="addProjectDrawer"
+      width={1500}
+      title="Add new project"
+      placement="right"
+      :closable="true"
+      :maskClosable="false"
+      :visible="visible"
+      :after-visible-change="afterVisibleChange"
+      @close="onClose"
+    >
+    
+    <a-form :form="form" :layout="formLayout" :label-col="{ span: 50 }" :wrapper-col="{ span: 120 }" @submit="handleSubmit">
+    <a-form-item label="Project Name">
+      <a-input
+        v-decorator="['project', { rules: [{ required: true, message: 'Please input the project name!' }] }]"
+      />
+    </a-form-item>
+    <a-form-item label="Amount of Users">
+      <a-input
+        v-decorator="['users', { rules: [{ required: true, message: 'Please input the amount of users' }] }]"
+      />
+    </a-form-item>
+    <a-form-item label="Amount of Dashboards">
+      <a-input
+        v-decorator="['dashboards', { rules: [{ required: true, message: 'Please input the amount of dashboards!' }] }]"
+      />
+    </a-form-item>
+    <a-form-item label="Category">
+      <a-select
+        v-decorator="[
+          'category',
+          { rules: [{ required: true, message: 'Please select the project category!' }] },
+        ]"
+        placeholder=""
+        
+      >
+        <a-select-option value="A">
+          A
+        </a-select-option>
+        <a-select-option value="B">
+          B
+        </a-select-option>
+        <a-select-option value="C">
+          C
+        </a-select-option>
+        <a-select-option value="D">
+          D
+        </a-select-option>
+        <a-select-option value="E">
+          E
+        </a-select-option>
+        <a-select-option value="F">
+          F
+        </a-select-option>
+      </a-select>
+    </a-form-item>
+    <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+      <a-button type="primary" html-type="submit">
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
+    </a-drawer>
+
     <a-table bordered :data-source="dataSource" :columns="columns">
       
       <!-- Dropdown filter part -->
@@ -60,6 +128,7 @@
 </template>
 
 <script src=".././scripts/dashboardoverview.js"></script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style src=".././assets/styles/dashboardoverview.css" scoped></style>

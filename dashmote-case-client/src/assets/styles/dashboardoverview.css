@@ -42,6 +42,9 @@
   }
   
   .add-button {
+    position: relative;
+    z-index: 99;
+    float: left;
     margin-bottom: 8px;
   }
   
