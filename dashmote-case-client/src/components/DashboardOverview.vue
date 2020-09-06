@@ -130,6 +130,10 @@
         <img v-else-if="record.category=='F'" alt="F" src="../assets/images/categoryicon/F.svg" height=40px>
       </template>
 
+      <template slot="dashboardoperation" slot-scope="text, record">
+        <a-button type="primary" v-text="record.dashboards" disabled="true" style="color:green"></a-button>
+      </template>
+
     </a-table>
   </div>
   </div>

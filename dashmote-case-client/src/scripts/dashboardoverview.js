@@ -76,6 +76,7 @@ export default {
           {
             title: 'Dashboards',
             dataIndex: 'dashboards',
+            scopedSlots: { customRender: 'dashboardoperation' },
             
           },
           {
