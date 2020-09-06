@@ -11,7 +11,7 @@
 
     <!-- Add new project part -->
     <a-drawer class="addProjectDrawer"
-      width={1500}
+      width=320px
       title="Add new project"
       placement="right"
       :closable="true"
@@ -112,16 +112,24 @@
 
     <!-- Item Delete part -->
 
-      <template slot="operation" slot-scope="text, record">
+      <template class="deletePart" slot="operation" slot-scope="text, record">
         <a-popconfirm
           v-if="dataSource.length"
           title="Sure to delete?"
           @confirm="() => onDelete(record.key)">
-          <a href="javascript:;">Delete</a>
+          <a href="javascript:;" style="color:red">Delete</a>
         </a-popconfirm>
-
-
       </template>
+
+      <template slot="categoryoperation" slot-scope="text, record">
+        <img v-if="record.category=='A'" alt="A" src="../assets/images/categoryicon/A.svg" height=40px>
+        <img v-else-if="record.category=='B'" alt="B" src="../assets/images/categoryicon/B.svg" height=40px>
+        <img v-else-if="record.category=='C'" alt="C" src="../assets/images/categoryicon/C.svg" height=40px>
+        <img v-else-if="record.category=='D'" alt="D" src="../assets/images/categoryicon/D.svg" height=40px>
+        <img v-else-if="record.category=='E'" alt="E" src="../assets/images/categoryicon/E.svg" height=40px>
+        <img v-else-if="record.category=='F'" alt="F" src="../assets/images/categoryicon/F.svg" height=40px>
+      </template>
+
     </a-table>
   </div>
   </div>

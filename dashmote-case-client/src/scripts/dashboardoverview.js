@@ -43,6 +43,7 @@ export default {
         {
             title: 'Category',
             dataIndex: 'category',
+            scopedSlots: { customRender: 'categoryoperation' },
             
         },
 
@@ -135,6 +136,7 @@ export default {
         e.preventDefault();
         this.form.validateFields((err, values) => {
           if (!err) {
+            this.visible = false;
             console.log('Received values of form: ', values);
             const { count, dataSource } = this;
             const newData = {
@@ -145,7 +147,6 @@ export default {
                 dashboards: values["dashboards"],
         };
         this.dataSource = [...dataSource, newData];
-        this.count = count + 1;
           }
         });
       },
