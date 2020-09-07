@@ -2,10 +2,16 @@
   <div class="overview">
     <div>
     
+    <!-- Add new project button -->
     <a-button class="add-button" type="primary" icon="plus-circle" @click="showDrawer">Add new Project</a-button>
-    <a-input-search class="search-input" placeholder="input search text" enter-button @search="onSearch" />
+    
+    <!-- Search input field -->
+    <a-input-search class="search-input" placeholder="input search text" enter-button
+      v-model="searchName" 
+      icon="search" 
+      @change="handleSearch"/>
 
-    <!-- Add new project part -->
+    <!-- Add new project drawer -->
     <a-drawer class="addProjectDrawer"
       width=320px
       title="Add new project"
@@ -14,9 +20,9 @@
       :maskClosable="false"
       :visible="visible"
       :after-visible-change="afterVisibleChange"
-      @close="onClose"
-    >
+      @close="onClose">
     
+    <!-- Add new project drawer form -->
     <a-form :form="form" :layout="formLayout" :label-col="{ span: 50 }" :wrapper-col="{ span: 120 }" @submit="handleSubmit">
     <a-form-item label="Project Name">
       <a-input
@@ -39,9 +45,7 @@
           'category',
           { rules: [{ required: true, message: 'Please select the project category!' }] },
         ]"
-        placeholder=""
-        
-      >
+        placeholder="">
         <a-select-option value="A">
           A
         </a-select-option>
@@ -70,44 +74,10 @@
   </a-form>
     </a-drawer>
 
+    <!-- Table definition -->
     <a-table class="dashboardstable"  :data-source="dataSource" :columns="columns" >
       
-      <!-- Dropdown filter part -->
-      <div
-      slot="filterDropdown"
-      slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
-      style="padding: 8px"
-    >
-      <a-input
-        v-ant-ref="c => (searchInput = c)"
-        :placeholder="`Search ${column.dataIndex}`"
-        :value="selectedKeys[0]"
-        style="width: 188px; margin-bottom: 8px; display: block;"
-        @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
-        @pressEnter="() => handleSearch(selectedKeys, confirm, column.dataIndex)"
-      />
-      <a-button
-        type="primary"
-        icon="search"
-        size="small"
-        style="width: 90px; margin-right: 8px"
-        @click="() => handleSearch(selectedKeys, confirm, column.dataIndex)"
-      >
-        Search
-      </a-button>
-      <a-button size="small" style="width: 90px" @click="() => handleReset(clearFilters)">
-        Reset
-      </a-button>
-    </div>
-    <a-icon
-      slot="filterIcon"
-      slot-scope="filtered"
-      type="search"
-      :style="{ color: filtered ? '#108ee9' : undefined }"
-    />
-
-    <!-- Item Delete part -->
-
+    <!-- Item Delete customrender -->
       <template class="deletePart" slot="operation" slot-scope="text, record">
         <a-popconfirm
           v-if="dataSource.length"
@@ -117,6 +87,7 @@
         </a-popconfirm>
       </template>
 
+      <!-- Item Category level visual customrender -->
       <template slot="categoryoperation" slot-scope="text, record">
         <img v-if="record.category=='A'" alt="A" src="../assets/images/categoryicon/A.svg" height=60px>
         <img v-else-if="record.category=='B'" alt="B" src="../assets/images/categoryicon/B.svg" height=60px>
@@ -126,6 +97,7 @@
         <img v-else-if="record.category=='F'" alt="F" src="../assets/images/categoryicon/F.svg" height=60px>
       </template>
 
+      <!-- Amount of Dashboards customrender -->
       <template slot="dashboardoperation" slot-scope="text, record">
         <a-button disabled type="primary" v-text="record.dashboards" style="color:green"></a-button>
       </template>
@@ -135,8 +107,8 @@
   </div>
 </template>
 
+<!-- Dashboard overview JS Script file -->
 <script src=".././scripts/dashboardoverview.js"></script>
 
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Dashboard overview CSS Style file -->
 <style src=".././assets/styles/dashboardoverview.css" scoped></style>

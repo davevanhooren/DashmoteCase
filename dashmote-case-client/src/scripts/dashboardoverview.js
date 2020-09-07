@@ -1,10 +1,16 @@
 export default {
+    created() {
+        console.log('Component has been created!');
+        this.dataSourceFiltered = this.dataSource;
+        this.count = 7;
+      },
     name: 'DashboardOverview',
     props: {},
     components: {
     },
     data() {
       return {
+        searchName: '',
         formLayout: 'vertical',
         form: this.$form.createForm(this, { name: 'coordinated' }),
         visible: false,
@@ -36,6 +42,28 @@ export default {
             users: '3 users',
             dashboards: '2 dashboards',
             category: 'D',
+          },
+          // Extra rows with categories, not from the mini-json
+          {
+            key: '4',
+            project: 'Coca-Cola',
+            users: '12 users',
+            dashboards: '6 dashboards',
+            category: 'A',
+          },
+          {
+            key: '5',
+            project: 'Heineken',
+            users: '23 users',
+            dashboards: '5 dashboards',
+            category: 'B',
+          },
+          {
+            key: '6',
+            project: 'Unilever',
+            users: '17 users',
+            dashboards: '8 dashboards',
+            category: 'E',
           },
         ],
         columns: [
@@ -78,7 +106,7 @@ export default {
             
           },
           {
-            title: 'operation',
+            title: 'Operation',
             dataIndex: 'operation',
             scopedSlots: { customRender: 'operation' },
             
@@ -90,32 +118,11 @@ export default {
     methods: {
     // Item delete method
       onDelete(key) {
-        const dataSource = [...this.dataSource];
-        this.dataSource = dataSource.filter(item => item.key !== key);
-      },
-      handleAdd() {
-        const { count, dataSource } = this;
-        const newData = {
-          key: count,
-          category: `A`,
-          project: `Project X${count}`,
-          users: `1 user`,
-          dashboards: `${count} dashboards`,
-        };
-        this.dataSource = [...dataSource, newData];
-        this.count = count + 1;
-      },
-
-      // Table search methods
-      handleSearch(selectedKeys, confirm, dataIndex) {
-        confirm();
-        this.searchText = selectedKeys[0];
-        this.searchedColumn = dataIndex;
-      },
-  
-      handleReset(clearFilters) {
-        clearFilters();
-        this.searchText = '';
+        const dataSource = [...this.dataSourceFiltered];
+        this.dataSourceFiltered = dataSource.filter(item => item.key !== key);
+        this.dataSource = this.dataSourceFiltered;
+        this.handleSearch();
+        console.log("Deleted "  + key)
       },
 
       // Drawer show methods
@@ -130,6 +137,28 @@ export default {
         this.visible = false;
       },
 
+      //search function
+      search (dataSource, argumentObj) {
+        let result = dataSource;
+        let dataClone = dataSource;
+        for (let argu in argumentObj) {
+            if (argumentObj[argu].length > 0) {
+                result = dataClone.filter(d => {
+                    return d[argu].indexOf(argumentObj[argu]) > -1;
+                });
+                dataClone = result;
+            }
+        }
+        return result;
+    },
+    handleSearch () {
+        console.log("hello");
+        console.log(this.dataSourceFiltered);
+        this.data1 = this.dataSourceFiltered;
+        this.data1 = this.search(this.data1, {project: this.searchName});
+        this.dataSource = this.data1;
+    },
+
       // Drawer form methods
       handleSubmit(e) {
         e.preventDefault();
@@ -137,17 +166,21 @@ export default {
           if (!err) {
             this.visible = false;
             console.log('Received values of form: ', values);
-            const { count, dataSource } = this;
+            const { dataSource } = this;
+            console.log(this.count)
             const newData = {
-                key: count,
+                key: this.count,
                 category: values["category"],
                 project: values["project"],
                 users: values["users"],
                 dashboards: values["dashboards"],
         };
         this.dataSource = [...dataSource, newData];
+        this.count = this.count+1;
+        this.dataSourceFiltered = this.dataSource;
           }
         });
       },
     },
   };
+  
