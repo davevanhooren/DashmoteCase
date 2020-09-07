@@ -1,5 +1,9 @@
 export default {
     created() {
+        addEventListener('resize', () => {
+            this.mobile = innerWidth <= 700
+            console.log(this.mobile);
+          })
         console.log('Component has been created!');
         this.dataSourceFiltered = this.dataSource;
         this.count = 7;
@@ -10,6 +14,7 @@ export default {
     },
     data() {
       return {
+        mobile:window.innerWidth <= 700,
         searchName: '',
         formLayout: 'vertical',
         form: this.$form.createForm(this, { name: 'coordinated' }),
@@ -66,38 +71,51 @@ export default {
             category: 'E',
           },
         ],
+        columnsMobile: [
+            {
+                title: 'Category',
+                dataIndex: 'category',
+                scopedSlots: { customRender: 'categoryoperation' },
+            },
+    
+              {
+                title: 'Project',
+                dataIndex: 'project',
+                key: 'project',
+              },
+            ],
+
+            innerColumns: [
+            {
+                title: 'Users',
+                dataIndex: 'users',
+            },
+            {
+                title: 'Dashboards',
+                dataIndex: 'dashboards',
+                scopedSlots: { customRender: 'dashboardoperation' },  
+            },
+            {
+                title: 'Operation',
+                dataIndex: 'operation',
+                scopedSlots: { customRender: 'operation' },
+            },
+            ],
+
         columns: [
         {
             title: 'Category',
             dataIndex: 'category',
             scopedSlots: { customRender: 'categoryoperation' },
         },
-
           {
             title: 'Project',
             dataIndex: 'project',
             key: 'project',
-            scopedSlots: {
-            filterDropdown: 'filterDropdown',
-            filterIcon: 'filterIcon',
-          },
-          onFilter: (value, record) =>
-            record.project
-              .toString()
-              .toLowerCase()
-              .includes(value.toLowerCase()),
-          onFilterDropdownVisibleChange: visible => {
-            if (visible) {
-              setTimeout(() => {
-                this.searchInput.focus();
-              }, 0);
-            }
-          },
           },
           {
             title: 'Users',
             dataIndex: 'users',
-            
           },
           {
             title: 'Dashboards',
@@ -116,6 +134,7 @@ export default {
     },
     
     methods: {
+        
     // Item delete method
       onDelete(key) {
         const dataSource = [...this.dataSourceFiltered];
@@ -153,7 +172,11 @@ export default {
     },
     handleSearch () {
         console.log("hello");
-        console.log(this.dataSourceFiltered);
+        console.log(this.dataSource);
+        console.log("ArrayTest");
+        //console.log(this.dataSource.keys());
+        console.log(new Array(this.dataSource.find(o => o.key === '1')));
+        
         this.data1 = this.dataSourceFiltered;
         this.data1 = this.search(this.data1, {project: this.searchName});
         this.dataSource = this.data1;

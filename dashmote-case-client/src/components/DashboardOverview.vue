@@ -6,7 +6,7 @@
     <a-button class="add-button" type="primary" icon="plus-circle" @click="showDrawer">Add new Project</a-button>
     
     <!-- Search input field -->
-    <a-input-search class="search-input" placeholder="input search text" enter-button
+    <a-input-search class="search-input" placeholder="search project" enter-button
       v-model="searchName" 
       icon="search" 
       @change="handleSearch"/>
@@ -75,8 +75,8 @@
     </a-drawer>
 
     <!-- Table definition -->
-    <a-table class="dashboardstable"  :data-source="dataSource" :columns="columns" >
-      
+    <a-table v-if="!this.mobile" class="dashboardstable" :data-source="dataSource" :columns="columns">
+    
     <!-- Item Delete customrender -->
       <template class="deletePart" slot="operation" slot-scope="text, record">
         <a-popconfirm
@@ -101,8 +101,44 @@
       <template slot="dashboardoperation" slot-scope="text, record">
         <a-button disabled type="primary" v-text="record.dashboards" style="color:green"></a-button>
       </template>
-
     </a-table>
+
+    <!-- Mobile Table definition -->
+    <a-table v-if="this.mobile" class="dashboardstable" :data-source="dataSource" :columns="columnsMobile">
+
+      <!-- Item Category level visual customrender -->
+      <template slot="categoryoperation" slot-scope="text, record">
+        <img v-if="record.category=='A'" alt="A" src="../assets/images/categoryicon/A.svg" height=60px>
+        <img v-else-if="record.category=='B'" alt="B" src="../assets/images/categoryicon/B.svg" height=60px>
+        <img v-else-if="record.category=='C'" alt="C" src="../assets/images/categoryicon/C.svg" height=60px>
+        <img v-else-if="record.category=='D'" alt="D" src="../assets/images/categoryicon/D.svg" height=60px>
+        <img v-else-if="record.category=='E'" alt="E" src="../assets/images/categoryicon/E.svg" height=60px>
+        <img v-else-if="record.category=='F'" alt="F" src="../assets/images/categoryicon/F.svg" height=60px>
+      </template>
+
+    <a-table 
+      slot="expandedRowRender"
+      slot-scope="record"
+      :columns="innerColumns" 
+      :data-source="new Array(dataSource.find(o => o.key === record.key))"
+      :pagination="false"
+    >
+      <!-- Amount of Dashboards customrender -->
+      <template slot="dashboardoperation" slot-scope="text, record">
+        <a-button disabled type="primary" v-text="record.dashboards" style="color:green"></a-button>
+      </template>
+
+      <!-- Item Delete customrender -->
+      <template class="deletePart" slot="operation" slot-scope="text, record">
+        <a-popconfirm
+          v-if="dataSource.length"
+          title="Sure to delete?"
+          @confirm="() => onDelete(record.key)">
+          <a href="javascript:;" style="color:red">Delete</a>
+        </a-popconfirm>
+      </template>
+    
+    </a-table></a-table>
   </div>
   </div>
 </template>
