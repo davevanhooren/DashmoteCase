@@ -1,9 +1,9 @@
 import Vue from 'vue';
-//import Button from 'ant-design-vue/lib/button';
 import 'ant-design-vue/dist/antd.css';
-import { Button, Layout, Table, Popconfirm, Icon, Input, Drawer, Form, Select} from 'ant-design-vue';
+import { Button, Layout, Table, Popconfirm, Icon, Input, Drawer, Form, Select } from 'ant-design-vue';
 import App from './App';
 
+//The required dependencies.
 Vue.use(Layout);
 Vue.use(Input);
 Vue.use(Button);
@@ -18,5 +18,5 @@ Vue.config.productionTip = false;
 
 
 new Vue({
-  render: h => h(App),
+    render: h => h(App),
 }).$mount('#app');

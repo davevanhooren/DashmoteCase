@@ -1,20 +1,18 @@
 .overview {
     margin: 20px;
-  }
-  
-  .add-button {
+}
+
+.add-button {
     position: relative;
     z-index: 99;
     float: left;
     margin-bottom: 8px;
-  }
+}
 
-  .search-input {
+.search-input {
     width: 200px;
     position: relative;
     z-index: 99;
     float: right;
     margin-bottom: 8px;
-  }
-
-  
+}

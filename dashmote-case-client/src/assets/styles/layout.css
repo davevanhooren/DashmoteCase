@@ -1,58 +1,64 @@
 #dashmote-case-layout {
     text-align: center;
-  }
-  #dashmote-case-layout .ant-layout-header {
+}
+
+#dashmote-case-layout .ant-layout-header {
     background: #7dbcea;
     color: #000;
-  }
-  
-  #dashmote-case-layout .ant-layout-header .logo {
+}
+
+#dashmote-case-layout .ant-layout-header .logo {
     width: 120px;
     height: 31px;
     margin: 0px 24px 16px 0;
     float: left;
-  }
-  
-  #dashmote-case-layout .ant-layout-header .profile-photo {
+}
+
+#dashmote-case-layout .ant-layout-header .profile-photo {
     width: 50px;
     height: 31px;
     margin: 0px 0px 16px 0;
     float: right;
-  }
+}
 
-  #dashmote-case-layout .ant-layout-header .profile-name {
+#dashmote-case-layout .ant-layout-header .profile-name {
     width: 150px;
     height: 31px;
     float: right;
-  }
+}
 
-  @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     #dashmote-case-layout .ant-layout-header .profile-name {
         display: none;
     }
-  }
-  
-  #dashmote-case-layout .ant-layout-footer {
+}
+
+#dashmote-case-layout .ant-layout-footer {
     background: #7dbcea;
     color: #fff;
-  }
-  #dashmote-case-layout .ant-layout-footer {
+}
+
+#dashmote-case-layout .ant-layout-footer {
     line-height: 1.5;
-  }
-  #dashmote-case-layout .ant-layout-sider {
+}
+
+#dashmote-case-layout .ant-layout-sider {
     background: #3ba0e9;
     color: #fff;
     line-height: 120px;
-  }
-  #dashmote-case-layout .ant-layout-content {
+}
+
+#dashmote-case-layout .ant-layout-content {
     background: #F2F6FC;
     color: #fff;
     min-height: 120px;
     line-height: 120px;
-  }
-  #dashmote-case-layout > .ant-layout {
+}
+
+#dashmote-case-layout>.ant-layout {
     margin-bottom: 48px;
-  }
-  #dashmote-case-layout > .ant-layout:last-child {
+}
+
+#dashmote-case-layout>.ant-layout:last-child {
     margin: 0;
-  }
+}
